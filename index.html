@@ -1,56 +1,69 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Accueil - 19PokerClub</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f4f8;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-  }
-  .container {
-    max-width: 600px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-    padding: 30px 25px;
-    text-align: center;
-  }
-  h1 {
-    color: #0d6efd;
-    margin-bottom: 20px;
-  }
-  p {
-    font-size: 1.1rem;
-    color: #333;
-    margin-bottom: 30px;
-  }
-  button {
-    background-color: #0d6efd;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 15px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    cursor: pointer;
-    width: 100%;
-  }
-  button:hover {
-    background-color: #084298;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accueil - 19PokerClub</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      padding: 30px 25px;
+      text-align: center;
+    }
+    .logo {
+      max-width: 100%;
+      width: 500px;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    h1 {
+      color: #0d6efd;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    button {
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #084298;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <a href="https://ibb.co/SDVmPCq8"><img src="https://i.ibb.co/0pY9cbPS/511154116-1275378644221702-9214444676891411464-n.jpg" alt="511154116-1275378644221702-9214444676891411464-n" border="0"></a>
+    <a href="https://ibb.co/SDVmPCq8">
+      <img
+        class="logo"
+        src="https://i.ibb.co/0pY9cbPS/511154116-1275378644221702-9214444676891411464-n.jpg"
+        alt="511154116-1275378644221702-9214444676891411464-n"
+      />
+    </a>
 
     <h1>Festival 19PokerClub 10 Ans</h1>
     <p>
@@ -59,9 +72,11 @@
     </p>
     <button id="btnCommencer">Commencer le questionnaire</button>
   </div>
-<script>
-  document.getElementById('btnCommencer').addEventListener('click', () => {
-    window.location.href = 'participant.html';
-  });
-</script>
-</body></html>
+
+  <script>
+    document.getElementById('btnCommencer').addEventListener('click', () => {
+      window.location.href = 'participant.html';
+    });
+  </script>
+</body>
+</html>
