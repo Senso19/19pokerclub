@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Informations Participant - 19PokerClub</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+  .container {
+    background: white;
+    max-width: 480px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    padding: 30px 25px;
+  }
+  h1 {
+    color: #0d6efd;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+  }
+  input[type="text"] {
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+  }
+  button {
+    margin-top: 30px;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    background-color: #0d6efd;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* largeur 100% */
+    display: block;
+  }
+
+  button:hover {
+    background-color: #084298;
+  }
+
+  .question {
+    margin-bottom: 25px;
+  }
+
+  .question p {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #444;
+  }
+
+  .question label {
+    margin-right: 10px;
+    font-weight: normal;
+    color: #333;
+  }
+    textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 1rem;
+      margin-top: 8px;
+      font-family: inherit;
+    }
+</style>
+</head>
+<body>
+  <script>
+    function validerGeneral() {
+      const questions = [
+        'confort',
+        'ambiance',
+        'benevoles',
+        'materiel',
+        'gestionTournoi',
+	'prixRepas',
+        'tarifsGen',
+	'dotationTou'
+      ];
+      let responses = {};
+      for(let q of questions) {
+        const val = document.querySelector('input[name="'+q+'"]:checked');
+        if(!val) {
+          alert("Merci de répondre à toutes les questions.");
+          return;
+        }
+        responses[q] = val.value;
+      }
+      // On peut stocker les réponses dans localStorage
+      localStorage.setItem('questionnaire_general', JSON.stringify(responses));
+      window.location.href = "tournoi_day.html";
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Questionnaire Général</h1>
+<p style="font-style: italic; font-size: 0.9rem; color: #555; text-align: center;">
+  Choisissez votre réponse : ( choix 1: très mauvais à choix 5: parfait )
+</p><BR>
+
+    <div class="question">
+      <p>Confort de la salle :</p>
+      <label><input type="radio" name="confort" value="1" required> 1</label>
+      <label><input type="radio" name="confort" value="2"> 2</label>
+      <label><input type="radio" name="confort" value="3"> 3</label>
+      <label><input type="radio" name="confort" value="4"> 4</label>
+      <label><input type="radio" name="confort" value="5"> 5</label>
+    </div>
+
+    <div class="question">
+      <p>Ambiance générale :</p>
+      <label><input type="radio" name="ambiance" value="1" required> 1</label>
+      <label><input type="radio" name="ambiance" value="2"> 2</label>
+      <label><input type="radio" name="ambiance" value="3"> 3</label>
+      <label><input type="radio" name="ambiance" value="4"> 4</label>
+      <label><input type="radio" name="ambiance" value="5"> 5</label>
+    </div>
+
+    <div class="question">
+      <p>Etat d'esprit des bénévoles du 19 Pokerclub :</p>
+      <label><input type="radio" name="benevoles" value="1" required> 1</label>
+      <label><input type="radio" name="benevoles" value="2"> 2</label>
+      <label><input type="radio" name="benevoles" value="3"> 3</label>
+      <label><input type="radio" name="benevoles" value="4"> 4</label>
+      <label><input type="radio" name="benevoles" value="5"> 5</label>
+    </div>
+
+    <div class="question">
+      <p>Matériel mis à disposition (tables, jetonneries etc...) :</p>
+      <label><input type="radio" name="materiel" value="1" required> 1</label>
+      <label><input type="radio" name="materiel" value="2"> 2</label>
+      <label><input type="radio" name="materiel" value="3"> 3</label>
+      <label><input type="radio" name="materiel" value="4"> 4</label>
+      <label><input type="radio" name="materiel" value="5"> 5</label>
+    </div>
+
+    <div class="question">
+      <p>Gestion des tournois :</p>
+      <label><input type="radio" name="gestionTournoi" value="1" required> 1</label>
+      <label><input type="radio" name="gestionTournoi" value="2"> 2</label>
+      <label><input type="radio" name="gestionTournoi" value="3"> 3</label>
+      <label><input type="radio" name="gestionTournoi" value="4"> 4</label>
+      <label><input type="radio" name="gestionTournoi" value="5"> 5</label>
+    </div>
+
+    <div class="question">
+      <p>Tarif du repas :</p>
+      <label><input type="radio" name="prixRepas" value="1" required> 1</label>
+      <label><input type="radio" name="prixRepas" value="2"> 2</label>
+      <label><input type="radio" name="prixRepas" value="3"> 3</label>
+      <label><input type="radio" name="prixRepas" value="4"> 4</label>
+      <label><input type="radio" name="prixRepas" value="5"> 5</label>
+    </div>
+
+    <div class="question">
+      <p>Tarifs en général :</p>
+      <label><input type="radio" name="tarifsGen" value="1" required> 1</label>
+      <label><input type="radio" name="tarifsGen" value="2"> 2</label>
+      <label><input type="radio" name="tarifsGen" value="3"> 3</label>
+      <label><input type="radio" name="tarifsGen" value="4"> 4</label>
+      <label><input type="radio" name="tarifsGen" value="5"> 5</label>
+    </div>
+
+    <div class="question">
+      <p>Dotation des tournois :</p>
+      <label><input type="radio" name="dotationTou" value="1" required> 1</label>
+      <label><input type="radio" name="dotationTou" value="2"> 2</label>
+      <label><input type="radio" name="dotationTou" value="3"> 3</label>
+      <label><input type="radio" name="dotationTou" value="4"> 4</label>
+      <label><input type="radio" name="dotationTou" value="5"> 5</label>
+    </div>
+
+      <div class="question">
+        <label for="commentaire">Commentaires (facultatif mais trés important !)</label>
+        <textarea id="commentaire" name="commentaire" placeholder="Vos remarques ici..."></textarea>
+      </div>
+
+    <button onclick="validerGeneral()">Suivant</button>
+  </div>
+
+<script>
+  function validerGeneral() {
+    const questions = [
+      'confort',
+      'ambiance',
+      'benevoles',
+      'materiel',
+      'gestionTournoi',
+      'prixRepas',
+      'tarifsGen',
+      'dotationTou' // Ajouté si utilisé
+    ];
+
+    const responses = {};
+    for (let q of questions) {
+      const selected = document.querySelector(`input[name="${q}"]:checked`);
+      if (!selected) {
+        alert("Merci de répondre à toutes les questions.");
+        return;
+      }
+      responses[q] = selected.value;
+    }
+
+    localStorage.setItem('questionnaire_general', JSON.stringify(responses));
+    window.location.href = "tournoi_day.html";
+  }
+</script>
+
+</body>
+</html>

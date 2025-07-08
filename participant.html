@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Informations Participant - 19PokerClub</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+  .container {
+    background: white;
+    max-width: 480px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    padding: 30px 25px;
+  }
+  h1 {
+    color: #0d6efd;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+  }
+  input[type="text"] {
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+  }
+  button {
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    background-color: #0d6efd;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #084298;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Informations Participant</h1>
+    <form id="formParticipant" onsubmit="event.preventDefault(); enregistrerParticipant();">
+      <label for="nom">Nom *</label>
+      <input type="text" id="nom" name="nom" required />
+
+      <label for="prenom">Prénom *</label>
+      <input type="text" id="prenom" name="prenom" required />
+
+      <label for="pseudo">Pseudo *</label>
+      <input type="text" id="pseudo" name="pseudo" required />
+
+      <label for="club">Club</label>
+      <input type="text" id="club" name="club" />
+
+      <button type="submit">Suivant</button>
+    </form>
+  </div>
+
+<script>
+  function enregistrerParticipant() {
+    const nom = document.getElementById('nom').value.trim();
+    const prenom = document.getElementById('prenom').value.trim();
+    const pseudo = document.getElementById('pseudo').value.trim();
+    const club = document.getElementById('club').value.trim();
+
+    if (!nom || !prenom || !pseudo || !club) {
+      alert("Merci de remplir tous les champs.");
+      return;
+    }
+
+    const infos = { nom, prenom, pseudo, club };
+    localStorage.setItem('participant_info', JSON.stringify(infos));
+    window.location.href = 'questionnaire_general.html';
+  }
+</script>
+</body>
+</html>

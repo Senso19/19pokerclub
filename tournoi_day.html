@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Choix Tournois et Days</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+  .container {
+    background: white;
+    max-width: 480px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    padding: 30px 25px;
+  }
+  h1 {
+    color: #0d6efd;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+  }
+  input[type="text"] {
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+  }
+  button {
+    margin-top: 30px;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    background-color: #0d6efd;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* largeur 100% */
+    display: block;
+  }
+
+  button:hover {
+    background-color: #084298;
+  }
+
+  .question {
+    margin-bottom: 25px;
+  }
+
+  .question p {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #444;
+  }
+
+  .question label {
+    margin-right: 10px;
+    font-weight: normal;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Choisissez les tournois et Day auxquels vous avez participé</h1>
+
+  <form id="formTournois" onsubmit="return validerTournois(event)">
+
+    <p><strong>Main Event - Road to Vegas (choix unique Day)</strong></p>
+    <label><input type="radio" name="mainEventDay" value="Main Event - Road to Vegas - Day 1A" /> Day 1A</label>
+    <label><input type="radio" name="mainEventDay" value="Main Event - Road to Vegas - Day 1B" /> Day 1B</label>
+    <label><input type="radio" name="mainEventDay" value="Main Event - Road to Vegas - Day 1C" /> Day 1C</label>
+
+    <p><strong>BattleRoyale - Go to Winamax Live</strong></p>
+    <label><input type="checkbox" name="tournoi" value="battleroyale" /> BattleRoyale - Go to Winamax Live</label>
+
+    <p><strong>Mini Event</strong></p>
+    <label><input type="checkbox" name="tournoi" value="minievent" /> Mini Event - Classic</label>
+    <label><input type="checkbox" name="tournoi" value="minievent" /> Mini Event - Omaha</label>
+
+    <button type="submit">Valider</button>
+  </form>
+</div>
+
+<script>
+  function validerTournois(event) {
+  event.preventDefault(); // bloque la soumission du form
+
+  // Récupérer le radio mainEventDay
+  const mainEvent = document.querySelector('input[name="mainEventDay"]:checked');
+
+  // Récupérer les cases à cocher nommées "tournoi"
+  const autresTournois = [...document.querySelectorAll('input[name="tournoi"]:checked')].map(input => input.value);
+
+  if (!mainEvent && autresTournois.length === 0) {
+    alert("Veuillez sélectionner au moins un tournoi.");
+    return false;
+  }
+
+  const selection = {
+    main_event_day: mainEvent ? mainEvent.value : null,
+    autres_tournois: autresTournois
+  };
+
+  localStorage.setItem("tournoi_day_selection", JSON.stringify(selection));
+
+  const questionnaires = [];
+
+  if (mainEvent) {
+    questionnaires.push("questionnaire_mainevent.html");
+  }
+
+  if (autresTournois.includes("battleroyale")) {
+    questionnaires.push("questionnaire_battleroyale.html");
+  }
+
+  if (autresTournois.includes("minievent")) {
+    questionnaires.push("questionnaire_minievent.html");
+  }
+
+  localStorage.setItem("questionnaires_restants", JSON.stringify(questionnaires));
+
+  if (questionnaires.length > 0) {
+    window.location.href = questionnaires[0];
+  } else {
+    window.location.href = "merci.html";
+  }
+
+  return false;
+}
+
+</script>
+</body>
+</html>

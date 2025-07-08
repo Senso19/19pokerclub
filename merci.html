@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Merci pour votre participation !</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background: #f9f9f9;
+      text-align: center;
+    }
+    .message {
+      margin-top: 40px;
+      font-size: 1.2em;
+    }
+    .loading { color: #555; }
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+  <h1>Merci pour votre participation au Festival 19PokerClub !</h1>
+  <div class="message loading" id="status">Envoi de vos réponses...</div>
+
+  <script>
+  async function envoyerReponses() {
+    const urlAppsScript = "https://script.google.com/macros/s/AKfycbzfbumdAulmo72UQ2ivBQG2gu6BPHhGSY-iZeAJRVjcGPzCs-qyhvDWzcYH-xWbzVZF/exec";
+
+    try {
+      // Récupération des données avec les noms de clés réellement présents
+      const participant = JSON.parse(localStorage.getItem('participant_info') || '{}');
+      const questionnaire = JSON.parse(localStorage.getItem('questionnaire_general') || '{}');
+
+      const tournoiData = JSON.parse(localStorage.getItem('tournoi_day_selection') || '{}');
+      const tournoisDay = [];
+
+      if (tournoiData.main_event_day) {
+        tournoisDay.push("Main Event - Road to Vegas - " + tournoiData.main_event_day);
+      }
+      if (Array.isArray(tournoiData.autres_tournois)) {
+        tournoisDay.push(...tournoiData.autres_tournois);
+      }
+
+      // Vérification minimale
+      if (!participant.nom || !participant.prenom || tournoisDay.length === 0) {
+        document.getElementById('status').textContent = "Certaines informations sont manquantes. Merci de recommencer.";
+        document.getElementById('status').className = "message error";
+        return;
+      }
+
+const reponses = {
+  participant: participant,
+  questionnaire_general: questionnaire,
+  questionnaire_mainevent: JSON.parse(localStorage.getItem('questionnaire_mainevent') || '{}'),
+  questionnaire_battleroyale: JSON.parse(localStorage.getItem('questionnaire_battleroyale') || '{}'),
+  questionnaire_minievent: JSON.parse(localStorage.getItem('questionnaire_minievent') || '{}'),
+  tournoisDay: tournoisDay
+};
+
+      await fetch(urlAppsScript, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reponses)
+      });
+
+      document.getElementById('status').textContent = "Vos réponses ont bien été envoyées. Merci !";
+      document.getElementById('status').className = "message success";
+
+      localStorage.clear(); // ou removeItem sur les clés spécifiques
+
+    } catch (err) {
+      document.getElementById('status').textContent = "Erreur lors de l'envoi : " + err.message;
+      document.getElementById('status').className = "message error";
+    }
+  }
+
+  window.onload = envoyerReponses;
+</script>
+
+</body>
+</html>
